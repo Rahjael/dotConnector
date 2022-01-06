@@ -4,6 +4,7 @@ const ctx = mainCanvas.getContext('2d');
 // Debug stuff
 let stopAnimation = true;
 let debugMode = true;
+const initialPoints = 4;
 
 
 
@@ -25,7 +26,7 @@ const CANVAS_CONFIG = {
   tempLinkColor: '#FFFFFF',
   bestLinkColor: '#15E038',
   tempLinkWidth: 1,
-  bestLinkWidth: 3,
+  bestLinkWidth: 5,
   canvasWidth: window.innerWidth,
   canvasHeight: window.innerHeight - mainCanvas.offsetTop,
   pointsPadding: 10,
@@ -42,7 +43,7 @@ const DATA = {
 }
 
 const INSTANCED_ALGORITHMS = {
-  absoluteRandom: new AlgoAbsoluteRandom(DATA.middlePoints)
+  absoluteRandom: new AlgoAbsoluteRandom(DATA.middlePoints, DATA.currentOrder)
 }
 
 const hud = new HUD(ctx);
@@ -120,6 +121,7 @@ function buttonPressed(buttonName) {
   }
   else if(buttonName === 'clearAll') {
     DATA.middlePoints.splice(0);
+    DATA.allPoints.splice(0);
     resetIndexesArrays();
   }
   else if(buttonName === 'start') {
@@ -178,7 +180,7 @@ function resetIndexesArrays() {
 }
 
 function reseedInstancedAlgorithms() {
-  INSTANCED_ALGORITHMS.absoluteRandom = new AlgoAbsoluteRandom(DATA.middlePoints);
+  INSTANCED_ALGORITHMS.absoluteRandom = new AlgoAbsoluteRandom(DATA.middlePoints, DATA.currentOrder);
 }
 
 function drawAllPoints() {  
@@ -189,7 +191,7 @@ function drawAllPoints() {
 function drawCurrentLinks() {
   // Draw links in current order
   DATA.currentOrder.forEach( (currentIndex, i, arr) => {
-    if(currentIndex < DATA.allPoints.length - 1) {
+    if(i < DATA.allPoints.length - 1) {
       DATA.allPoints[currentIndex].drawLinkTo(DATA.allPoints[arr[i + 1]]);
     }
   });
@@ -198,7 +200,7 @@ function drawCurrentLinks() {
 function drawBestLinks() {
   // Draw links for best configuration so far
   DATA.bestOrderSoFar.forEach( (currentIndex, i, arr) => {
-    if(currentIndex < DATA.allPoints.length - 1) {
+    if(i < DATA.allPoints.length - 1) {
       DATA.allPoints[currentIndex].drawLinkTo(DATA.allPoints[arr[i + 1]], 'bestSoFar');
     }
   });
@@ -223,21 +225,16 @@ function animate() {
   drawAllPoints();
 
   DATA.currentOrder = INSTANCED_ALGORITHMS.absoluteRandom.getNextOrder();
-  // drawCurrentLinks();
+  drawCurrentLinks();
 
   let currentTotalDistance = Point.getSumOfDistances(DATA.allPoints, DATA.currentOrder);
   if(currentTotalDistance < DATA.bestDistanceSoFar) {
-    console.log('updating best: ', DATA.bestDistanceSoFar, currentTotalDistance)
+    // console.log('updating best: ', DATA.bestDistanceSoFar, currentTotalDistance)
     DATA.bestDistanceSoFar = currentTotalDistance;
     DATA.bestOrderSoFar = [...DATA.currentOrder];
   }
 
   drawBestLinks();
-
-  console.log(currentTotalDistance)
-
-
-
 
 
 
@@ -265,7 +262,7 @@ function animate() {
 
 
 let LAST_FRAME_TIME = Date.now();
-randomizePoints(5);
+randomizePoints(initialPoints);
 
 
 

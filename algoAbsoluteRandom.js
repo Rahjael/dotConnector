@@ -1,11 +1,12 @@
 class AlgoAbsoluteRandom {
-  constructor(middlePoints){
-    this.points = middlePoints;
-    this.order = UTILS.getRange(1, middlePoints.length);
+  constructor(middlePointsHook, orderHook){
+    this.middlePointsHook = middlePointsHook;
+    this.orderHook = orderHook;
   }
 
   getNextOrder() {
-    UTILS.shuffleArray(this.order);
-    return [0].concat(this.order, this.order.length + 1);
+    let tempArray = [...this.orderHook.slice(1,this.orderHook.length - 1)];
+    UTILS.shuffleArray(tempArray);
+    return [0].concat(tempArray, tempArray.length + 1);
   }
 }

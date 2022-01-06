@@ -8,7 +8,9 @@ const UTILS = {
     // Make sure we are dealing with integers
     start = Math.floor(start);
     howMany = Math.floor(howMany);
-    if(start === howMany) return [];
+    
+    console.log('inside getrange', start, howMany)
+    if(start === howMany || howMany < 1) return [];
     const array = Array(howMany - start);
     for(let i = 0; i < howMany; i++) {
       array[i] = i + start;
