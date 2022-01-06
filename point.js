@@ -30,11 +30,15 @@ class Point {
   }
 
   drawLinkTo(otherPoint, type = 'temp') {
+    if(type === 'temp' && !CANVAS_CONFIG.animateTempLinks) {
+      return;
+    }
     let color;
     if(type === 'temp') color = CANVAS_CONFIG.tempLinkColor;
     else if(type === 'bestSoFar') color = CANVAS_CONFIG.bestLinkColor;
+    else if(type === 'previousBest') color = CANVAS_CONFIG.previousBestLinkColor;
     this.ctx.strokeStyle = color;
-    this.ctx.lineWidth = type === 'temp' ? CANVAS_CONFIG.tempLinkWidth : CANVAS_CONFIG.bestLinkWidth;
+    this.ctx.lineWidth = type != 'bestSoFar' ? CANVAS_CONFIG.tempLinkWidth : CANVAS_CONFIG.bestLinkWidth;
     this.ctx.beginPath();
     this.ctx.moveTo(this.x, this.y);
     this.ctx.lineTo(otherPoint.x, otherPoint.y);

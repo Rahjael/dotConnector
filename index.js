@@ -24,7 +24,9 @@ const CANVAS_CONFIG = {
   bgColor: '#2596be',
   pointColor: '#F6F83C',
   tempLinkColor: '#FFFFFF',
+  animateTempLinks: true,
   bestLinkColor: '#15E038',
+  previousBestLinkColor: '#FFD29A',
   tempLinkWidth: 1,
   bestLinkWidth: 5,
   canvasWidth: window.innerWidth,
@@ -39,6 +41,7 @@ const DATA = {
   allPoints: [],
   currentOrder: [],
   bestOrderSoFar: [],
+  previousBest: [],
   bestDistanceSoFar: Number.POSITIVE_INFINITY
 }
 
@@ -130,9 +133,11 @@ function buttonPressed(buttonName) {
       animate();
     }
   }
-
   else if(buttonName === 'pause') {
     stopAnimation = true;
+  }
+  else if(buttonName === 'flag-animate-tempLinks') {
+    CANVAS_CONFIG.animateTempLinks = document.querySelector('#flag-animate-tempLinks').checked;
   }
 
 }
@@ -145,7 +150,7 @@ function addPoint(x, y) {
   if(DATA.middlePoints.length > MAX_MIDDLE_POINTS) {
     DATA.middlePoints.shift();
   }
-  DATA.allPoints = [DATA.startingPoint].concat(DATA.middlePoints, DATA.endingPoint);
+  // DATA.allPoints = [DATA.startingPoint].concat(DATA.middlePoints, DATA.endingPoint);
 
   resetIndexesArrays();
 }
@@ -153,6 +158,7 @@ function addPoint(x, y) {
 function randomizePoints(num) {
   DATA.middlePoints.splice(0);
   DATA.bestOrderSoFar.splice(0);
+  DATA.previousBest.splice(0);
   DATA.bestDistanceSoFar = Number.POSITIVE_INFINITY;
 
   for(let i = 0; i < num; i++) {
@@ -176,6 +182,8 @@ function getRandomXY() {
 function resetIndexesArrays() {
   DATA.currentOrder = UTILS.getRange(DATA.middlePoints.length + 2);
   DATA.bestOrderSoFar = [...DATA.currentOrder];
+  DATA.previousBest.splice(0);
+  DATA.bestDistanceSoFar = Number.POSITIVE_INFINITY;
   reseedInstancedAlgorithms();
 }
 
@@ -196,12 +204,19 @@ function drawCurrentLinks() {
     }
   });
 }
-
 function drawBestLinks() {
   // Draw links for best configuration so far
   DATA.bestOrderSoFar.forEach( (currentIndex, i, arr) => {
     if(i < DATA.allPoints.length - 1) {
       DATA.allPoints[currentIndex].drawLinkTo(DATA.allPoints[arr[i + 1]], 'bestSoFar');
+    }
+  });
+}
+function drawPreviousBestLinks() {
+  // Draw links for best configuration so far
+  DATA.previousBest.forEach( (currentIndex, i, arr) => {
+    if(i < DATA.allPoints.length - 1) {
+      DATA.allPoints[currentIndex].drawLinkTo(DATA.allPoints[arr[i + 1]], 'previousBest');
     }
   });
 }
@@ -224,17 +239,18 @@ function animate() {
   DATA.allPoints = [DATA.startingPoint, ...DATA.middlePoints, DATA.endingPoint];
   drawAllPoints();
 
-  DATA.currentOrder = INSTANCED_ALGORITHMS.absoluteRandom.getNextOrder();
+  DATA.currentOrder = [...INSTANCED_ALGORITHMS.absoluteRandom.getNextOrder()];
   drawCurrentLinks();
 
   let currentTotalDistance = Point.getSumOfDistances(DATA.allPoints, DATA.currentOrder);
   if(currentTotalDistance < DATA.bestDistanceSoFar) {
-    // console.log('updating best: ', DATA.bestDistanceSoFar, currentTotalDistance)
     DATA.bestDistanceSoFar = currentTotalDistance;
+    DATA.previousBest = [...DATA.bestOrderSoFar];
     DATA.bestOrderSoFar = [...DATA.currentOrder];
   }
 
   drawBestLinks();
+  drawPreviousBestLinks();
 
 
 

@@ -19,7 +19,6 @@
   <title>dotConnector</title>
 </head>
 <body>
-
   <div id='menu-container'>
     <form id='input-form'>
       <input type='number' id='dots-to-generate' name='dots-to-generate' value='4' min='4' max='10'>
@@ -28,6 +27,8 @@
       <button type='button' onclick='buttonPressed("start")' id='btn-start'>Start</button>
       <button type='button' onclick='buttonPressed("pause")' id='btn-pause'>Pause</button>
     </form>
+    <input type='checkbox' id='flag-animate-tempLinks' name='flag-animate-tempLinks' onclick='buttonPressed("flag-animate-tempLinks")'>
+    <label for='flag-animate-tempLinks'>Animate sorting vectors</label>
   </div>
 
   <canvas id='main-canvas' tabindex='1'></canvas>
