@@ -25,10 +25,12 @@ const CANVAS_CONFIG = {
   pointColor: '#F6F83C',
   tempLinkColor: '#FFFFFF',
   animateTempLinks: true,
-  bestLinkColor: '#15E038',
+  showPreviousBest: true,
+  bestLinkColor: '#D11406',
   previousBestLinkColor: '#FFD29A',
   tempLinkWidth: 1,
   bestLinkWidth: 5,
+  previousBestLinkWidth: 3,
   canvasWidth: window.innerWidth,
   canvasHeight: window.innerHeight - mainCanvas.offsetTop,
   pointsPadding: 10,
@@ -138,6 +140,9 @@ function buttonPressed(buttonName) {
   }
   else if(buttonName === 'flag-animate-tempLinks') {
     CANVAS_CONFIG.animateTempLinks = document.querySelector('#flag-animate-tempLinks').checked;
+  }
+  else if(buttonName === 'flag-show-previous-best') {
+    CANVAS_CONFIG.showPreviousBest = document.querySelector('#flag-show-previous-best').checked;
   }
 
 }
@@ -249,8 +254,8 @@ function animate() {
     DATA.bestOrderSoFar = [...DATA.currentOrder];
   }
 
-  drawBestLinks();
   drawPreviousBestLinks();
+  drawBestLinks();
 
 
 

@@ -33,12 +33,25 @@ class Point {
     if(type === 'temp' && !CANVAS_CONFIG.animateTempLinks) {
       return;
     }
+    if(type === 'previousBest' && !CANVAS_CONFIG.showPreviousBest) {
+      return;
+    }
     let color;
-    if(type === 'temp') color = CANVAS_CONFIG.tempLinkColor;
-    else if(type === 'bestSoFar') color = CANVAS_CONFIG.bestLinkColor;
-    else if(type === 'previousBest') color = CANVAS_CONFIG.previousBestLinkColor;
+    let lineWidth
+    if(type === 'temp') {
+      color = CANVAS_CONFIG.tempLinkColor;
+      lineWidth = CANVAS_CONFIG.tempLinkWidth;
+    }
+    else if(type === 'bestSoFar') {
+      color = CANVAS_CONFIG.bestLinkColor;
+      lineWidth = CANVAS_CONFIG.bestLinkWidth;
+    }
+    else if(type === 'previousBest') {
+      color = CANVAS_CONFIG.previousBestLinkColor;
+      lineWidth = CANVAS_CONFIG.previousBestLinkWidth;
+    }
     this.ctx.strokeStyle = color;
-    this.ctx.lineWidth = type != 'bestSoFar' ? CANVAS_CONFIG.tempLinkWidth : CANVAS_CONFIG.bestLinkWidth;
+    this.ctx.lineWidth = lineWidth;
     this.ctx.beginPath();
     this.ctx.moveTo(this.x, this.y);
     this.ctx.lineTo(otherPoint.x, otherPoint.y);

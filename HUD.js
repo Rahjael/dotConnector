@@ -7,6 +7,7 @@ class HUD {
 
     this.colors = ['#000000', '#FFFFFF'];
     this.currentColor = 0;
+
   }
 
 
@@ -22,6 +23,6 @@ class HUD {
     this.ctx.arc(this.x, this.y, this.currentRadius, 0, 2 * Math.PI);
     this.ctx.fill();
     this.ctx.fillStyle = CANVAS_CONFIG.bgColor;
-
   }
+
 }
