@@ -19,19 +19,25 @@
   <title>dotConnector</title>
 </head>
 <body>
-  <div id='menu-container'>
-    <form id='input-form'>
-      <input type='number' id='dots-to-generate' name='dots-to-generate' value='4' min='4' max='10'>
-      <button type='button' onclick='buttonPressed("randomize")' id='btn-randomize'>Randomize</button>
-      <button type='button' onclick='buttonPressed("clearAll")' id='btn-clear-all'>Clear All</button>
-      <button type='button' onclick='buttonPressed("start")' id='btn-start'>Start</button>
-      <button type='button' onclick='buttonPressed("pause")' id='btn-pause'>Pause</button>
-    </form>
-    <input type='checkbox' id='flag-animate-tempLinks' name='flag-animate-tempLinks' onclick='buttonPressed("flag-animate-tempLinks")' checked>
-    <label for='flag-animate-tempLinks'>Animate sorting vectors</label>
-    <input type='checkbox' id='flag-show-previous-best' name='flag-show-previous-best' onclick='buttonPressed("flag-show-previous-best")' checked>
-    <label for='flag-show-previous-best'>Show previous best path</label>
-  </div>
+  <header>
+    <div id='menu-container'>
+      <form id='input-form'>
+        <input type='number' id='dots-to-generate' name='dots-to-generate' value='4' min='4' max='10'>
+        <button type='button' onclick='buttonPressed("randomize")' id='btn-randomize'>Randomize</button>
+        <button type='button' onclick='buttonPressed("clearAll")' id='btn-clear-all'>Clear All</button>
+        <button type='button' onclick='buttonPressed("start")' id='btn-start'>Start</button>
+        <button type='button' onclick='buttonPressed("pause")' id='btn-pause'>Pause</button>
+      </form>
+      <input type='checkbox' id='flag-animate-tempLinks' name='flag-animate-tempLinks' onclick='buttonPressed("flag-animate-tempLinks")' checked>
+      <label for='flag-animate-tempLinks'>Animate sorting vectors</label>
+      <input type='checkbox' id='flag-show-previous-best' name='flag-show-previous-best' onclick='buttonPressed("flag-show-previous-best")' checked>
+      <label for='flag-show-previous-best'>Show previous best path</label>
+    </div>
+
+    <div id='project-page-link'>
+      <a href="https://github.com/Rahjael/dotConnector">Github</a>
+    </div>
+  </header>
 
   <canvas id='main-canvas' tabindex='1'></canvas>
   

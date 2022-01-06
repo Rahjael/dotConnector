@@ -1,9 +1,5 @@
 # dotConnector
 
-## Table of Contents
-
-- [About](#about)
-
 ## About <a name = "about"></a>
 
 A simple proof of concept for a traveling salesman algorithm.

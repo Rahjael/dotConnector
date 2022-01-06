@@ -13,6 +13,14 @@ body {
   align-items: center;
 }
 
+header {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  align-items: center;
+}
+
+
 button {
   padding: 0.2rem;
 }
@@ -20,6 +28,9 @@ button {
 #menu-container {
   margin: 1rem;
 
+}
+
+#project-page-link {
 }
 
 #dots-to-generate {
