@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+  <script src="./utils.js"></script>
+  <script src="./HUD.js"></script>
+
+  <script src="./algoAbsoluteRandom.js"></script>
+
+  <script src="./point.js" defer></script>
+  <script src="./index.js" defer></script>
+
+  <link rel="stylesheet" href="./style.css" />
+
+  <title>dotConnector</title>
+</head>
+<body>
+
+  <div id='menu-container'>
+    <form id='input-form'>
+      <input type='number' id='dots-to-generate' name='dots-to-generate' value='8' min='4' max='12'>
+      <button type='button' onclick='buttonPressed("randomize")' id='btn-randomize'>Randomize</button>
+      <button type='button' onclick='buttonPressed("clearAll")' id='btn-clear-all'>Clear All</button>
+      <button type='button' onclick='buttonPressed("start")' id='btn-start'>Start</button>
+      <button type='button' onclick='buttonPressed("pause")' id='btn-pause'>Pause</button>
+    </form>
+  </div>
+
+  <canvas id='main-canvas' tabindex='1'></canvas>
+  
+</body>
+</html>
