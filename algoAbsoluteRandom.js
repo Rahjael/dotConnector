@@ -9,4 +9,8 @@ class AlgoAbsoluteRandom {
     UTILS.shuffleArray(tempArray);
     return [0].concat(tempArray, tempArray.length + 1);
   }
+
+  restart() {
+    // nothing to do
+  }  
 }

@@ -7,7 +7,18 @@ class Point {
   static getSumOfDistances(pointsArray, indexesArray) {
     return indexesArray.reduce( (sum, currentIndex, i, arr) => {
       if(i < arr.length - 1) {
-        sum += pointsArray[currentIndex].getDistanceTo(pointsArray[arr[i + 1]]);
+        try {
+          sum += pointsArray[currentIndex].getDistanceTo(pointsArray[arr[i + 1]]);
+
+        }
+        catch(e) {
+          console.log(e);
+          console.log('pointsArray: ', pointsArray);
+          console.log('indexesArray: ', indexesArray);
+          console.log('currentValue in indexesArray', currentIndex)
+          console.log('value for B element being passed to getDistanceTo() (arr[i + 1]): ', arr[i + 1])
+          console.log('i: ', i);
+        }
       }
       return sum;
     }, 0);

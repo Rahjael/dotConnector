@@ -10,6 +10,7 @@
   <script src="./HUD.js"></script>
 
   <script src="./algoAbsoluteRandom.js"></script>
+  <script src="./algoClosestFirst.js"></script>
 
   <script src="./point.js" defer></script>
   <script src="./index.js" defer></script>
@@ -22,16 +23,23 @@
   <header>
     <div id='menu-container'>
       <form id='input-form'>
-        <input type='number' id='dots-to-generate' name='dots-to-generate' value='4' min='4' max='10'>
+        <!-- <input type='number' id='dots-to-generate' name='dots-to-generate' value='4' min='4' max='10'> -->
+        <input type='number' id='dots-to-generate' name='dots-to-generate' value='4'>
         <button type='button' onclick='buttonPressed("randomize")' id='btn-randomize'>Randomize</button>
         <button type='button' onclick='buttonPressed("clearAll")' id='btn-clear-all'>Clear All</button>
         <button type='button' onclick='buttonPressed("start")' id='btn-start'>Start</button>
         <button type='button' onclick='buttonPressed("pause")' id='btn-pause'>Pause</button>
+        <button type='button' onclick='buttonPressed("help")' id='btn-help'>Help & Info</button>
       </form>
       <input type='checkbox' id='flag-animate-tempLinks' name='flag-animate-tempLinks' onclick='buttonPressed("flag-animate-tempLinks")' checked>
       <label for='flag-animate-tempLinks'>Animate sorting vectors</label>
       <input type='checkbox' id='flag-show-previous-best' name='flag-show-previous-best' onclick='buttonPressed("flag-show-previous-best")' checked>
       <label for='flag-show-previous-best'>Show previous best path</label>
+      
+      <select name="select-algorithm" id="select-algorithm">
+          <option value="algoAbsoluteRandom" onclick='selectAlgorithm("absoluteRandom")'>Absolute Random</option>
+          <option value="algoClosestFirst" onclick='selectAlgorithm("closestFirst")'>Closest First</option>
+      </select>
     </div>
 
     <div id='project-page-link'>
