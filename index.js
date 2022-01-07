@@ -83,6 +83,8 @@ function buttonPressed(buttonName) {
     //   animate();
     // }
     stopCalculations = false;
+    selectAlgorithm(document.querySelector('#select-algorithm').value);
+    
   }
   else if(buttonName === 'pause') {
     // stopAnimation = true;
