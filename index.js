@@ -5,7 +5,7 @@ const ctx = mainCanvas.getContext('2d');
 let stopAnimation = false;
 let stopCalculations = true;
 let debugMode = true;
-const initialPoints = 4;
+const initialPoints = document.querySelector('#dots-to-generate').value;
 
 
 
