@@ -46,7 +46,7 @@ const DATA = {
   bestOrderSoFar: [],
   previousBest: [],
   bestDistanceSoFar: Number.POSITIVE_INFINITY,
-  currentAlgorithm: 'absoluteRandom'
+  currentAlgorithm: 'closestFirst'
 }
 
 const INSTANCED_ALGORITHMS = {};
